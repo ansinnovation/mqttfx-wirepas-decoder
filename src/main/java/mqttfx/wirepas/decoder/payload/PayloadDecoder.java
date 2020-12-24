@@ -52,7 +52,7 @@ public abstract class PayloadDecoder {
     /* ********************************************************************** */
     private static final List<PayloadDecoder> PAYLOAD_DECODERS
             = Arrays.asList(
-                    //TODO
+                    new PositioningDecoder()
             );
 
     public static DecoderResult decodeDataPayload(int srcEp, int dstEp, byte[] dataPayload) {
