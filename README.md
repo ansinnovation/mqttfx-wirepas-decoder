@@ -1,3 +1,10 @@
+# mqttfx-wirepas-decoder-multi
+This is a Work in Progress.
+The goal is to extend the original plugin to be able to add decoders for payload, and also for other formats than protobuf.
+
+
+here is the original README
+
 # mqttfx-wirepas-decoder
 
 This project contains an addon for the [MQTT.fx][mqttfx] application that can decode wirepas protobuf
