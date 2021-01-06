@@ -47,6 +47,13 @@ public abstract class PayloadDecoder {
         return wrappedBuffer.hasRemaining();
     }
 
+    protected void skip(int length) {
+        // consume data without using position() to avoid java8 vs java 9+ issues
+        for (int i=0; i< length; i++) {
+            getSignedByte();
+        }
+    }
+
     public abstract DecoderResult decode(int srcEp, int dstEp, byte[] payload) throws Exception;
     
     /* ********************************************************************** */

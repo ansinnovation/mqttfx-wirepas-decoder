@@ -28,7 +28,7 @@ public class PositioningDecoder extends PayloadDecoder {
                 address |= getUnsignedByte() << 24;
             }
 
-            rssi = getSignedByte();
+            rssi = (int)(getUnsignedByte() * -0.5);
         }
 
         public void updateArray(ArrayNode array) {
@@ -70,11 +70,14 @@ public class PositioningDecoder extends PayloadDecoder {
             int mLength = getUnsignedByte();
 
             if ((mType == MEAS_V4) || (mType == MEAS_V5)) {
-                meas.add(new Measurement(mType));
+                int nbElem = mLength / ((mType == MEAS_V4) ? 4 : 5);
+                for (int i=0; i<nbElem; i++) {
+                    meas.add(new Measurement(mType));
+                }
             } else if (mType == VOLTAGE) {
                 voltage = new Voltage();
             } else {
-                wrappedBuffer.position(wrappedBuffer.position() + mLength);
+                skip(mLength);
             }
         }
 
